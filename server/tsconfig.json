@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "sourceMap": true,
+    "module": "commonjs",
+    "isolatedModules": false,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": false,
+    "outDir": "build/server",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "typeRoots": ["../node_modules/@types", "../custom_typings"]
+  },
+  "include": [
+    "server"
+  ]
+}
