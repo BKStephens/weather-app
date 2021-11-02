@@ -10,6 +10,7 @@
     "@types/node": "^16.11.6",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -20,6 +21,9 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
+    ],
+    "server/**/*.{js,ts,json,md}": [
+      "prettier --write"
     ]
   },
   "scripts": {
@@ -27,7 +31,6 @@
     "client:start": "react-scripts start",
     "client:build": "react-scripts build",
     "client:test": "react-scripts test",
-    "client:eject": "react-scripts eject",
     "prepare": "husky install"
   },
   "eslintConfig": {
