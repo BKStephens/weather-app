@@ -6,9 +6,11 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@types/lodash.debounce": "^4.0.6",
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "lodash.debounce": "^4.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -26,7 +28,6 @@
   "scripts": {
     "server:start": "yarn client:build && ts-node-dev --project ./server/tsconfig.json ./server/index.ts",
     "server:test": "jest --testPathPattern=server",
-    "client:start": "react-scripts start",
     "client:build": "react-scripts build",
     "client:test": "react-scripts test",
     "prepare": "husky install"

@@ -22,8 +22,15 @@ function createServer() {
         });
         return;
       }
-      const data = await Geocoding.search(q);
-      res.send(data);
+      try {
+        const data = await Geocoding.search(q);
+        res.send(data);
+        return;
+      } catch (e) {
+        console.error(e);
+        res.status(500).send('Internal server error');
+        return;
+      }
     }
   );
 
