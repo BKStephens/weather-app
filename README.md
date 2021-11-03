@@ -1,8 +1,18 @@
 # Weather App
 
+## Demo
+
+![Demo](./public/demo.gif)
+
 ## Setup
 
-Get an (OpenWeather API key)[https://home.openweathermap.org/users/sign_up] and
+Install dependencies
+
+```
+yarn install
+```
+
+Get an [OpenWeather API key](https://home.openweathermap.org/users/sign_up) and
 add it to your .env
 
 ```
@@ -11,8 +21,14 @@ cp .env.template .env
 
 ## Run
 
-Start both the client (`yarn client:start`) and the server (`yarn server:start`)
-and then navigate to [http://localhost:3000](http://localhsot:3000)
+Start the server (`yarn server:start`)
+and then navigate to [http://localhost:8000](http://localhost:8000)
+
+## Development
+
+While making changes to the client side React code, you will need to run `yarn
+client:build` or stop and start the server with `yarn server:start` in order for
+your changes to be picked up.
 
 ## Available Scripts
 
@@ -22,18 +38,9 @@ In the project directory, you can run:
 
 Runs the server.
 
-### `yarn client:start`
+### `yarn server:test`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn client:test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs the server tests.
 
 ### `yarn client:build`
 
