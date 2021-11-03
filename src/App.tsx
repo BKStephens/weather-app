@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-import { StylesObj, GeocodingMatch } from './shared-types';
+import { StylesObj, GeocodingMatch, WeatherDetails } from './shared-types';
 import AutocompleteSearch from './AutocompleteSearch';
+import CurrentWeather from './CurrentWeather';
 
 function App() {
   const [geocodingMatches, setGeocodingMatches] = useState<GeocodingMatch[]>(
     []
   );
   const [errorMessage, setErrorMessage] = useState('');
+  const [weatherDetails, setWeatherDetails] = useState<WeatherDetails | null>();
 
   const onSearchResultSelected = (latLon: string | null) => {
-    console.log('######### onSearchResultSelected', latLon);
-    // TODO: call server and get forecast data
+    const { lat, lon } = geocodingMatches.find(
+      (x) => x.key === latLon
+    ) as GeocodingMatch;
+    axios
+      .get<WeatherDetails>(`/api/v1/weather?lat=${lat}&lon=${lon}`)
+      .then(({ data }) => {
+        setErrorMessage('');
+        setWeatherDetails(data);
+      })
+      .catch((error) => {
+        setErrorMessage(
+          'Something went wrong. Please try again in a minute or try a different search.'
+        );
+      });
   };
 
   return (
@@ -23,6 +38,7 @@ function App() {
         setErrorMessage={setErrorMessage}
       />
       {errorMessage.length > 0 && <p style={styles.error}>{errorMessage}</p>}
+      {weatherDetails && <CurrentWeather weatherDetails={weatherDetails} />}
     </div>
   );
 }

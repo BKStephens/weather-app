@@ -11,3 +11,12 @@ export interface GeocodingMatch {
 export interface StylesObj {
   [key: string]: React.CSSProperties;
 }
+
+export interface WeatherDetails {
+  temp: number;
+  feelsLike: number;
+  dayTemp: number;
+  nightTemp: number;
+  weatherType: string;
+  weatherIconUrl: string;
+}
