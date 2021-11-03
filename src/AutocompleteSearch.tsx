@@ -39,6 +39,7 @@ function AutocompleteSearch(props: AutocompleteSearchProps) {
     debounceCallback(e.target.value);
   };
 
+  const debounceTimeout = 300;
   const debounceCallback = useCallback(
     debounce((searchInput) => {
       if (searchInput.length > 0) {
@@ -64,7 +65,7 @@ function AutocompleteSearch(props: AutocompleteSearchProps) {
         setGeocodingMatches([]);
         updateFocusedLiKey(null);
       }
-    }, 300),
+    }, debounceTimeout),
     []
   );
 

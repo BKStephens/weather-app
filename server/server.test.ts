@@ -88,3 +88,38 @@ describe('GET /api/v1/geocoding', () => {
     );
   });
 });
+
+describe('GET /api/v1/weather', () => {
+  test('returns data when lat and lon passed in', async () => {
+    const response = await axios.get(
+      `http://0.0.0.0:3777/api/v1/weather?lat=47.3073&lon=-122.2284`
+    );
+
+    expect(response.data).toEqual({
+      dayTemp: 57,
+      feelsLike: 49,
+      nightTemp: 51,
+      temp: 50,
+      weatherType: 'Clouds',
+      weatherIconUrl: 'openweathermap.org/img/wn/04n@2x.png',
+    });
+  });
+
+  test('returns HTTP 400 when no lat query string parameter', async () => {
+    const promise = axios.get(
+      `http://0.0.0.0:3777/api/v1/weather?lon=-122.2284`
+    );
+
+    await expect(promise).rejects.toThrow(
+      'Request failed with status code 400'
+    );
+  });
+
+  test('returns HTTP 400 when no lon query string parameter', async () => {
+    const promise = axios.get(`http://0.0.0.0:3777/api/v1/weather?lat=47.3073`);
+
+    await expect(promise).rejects.toThrow(
+      'Request failed with status code 400'
+    );
+  });
+});
