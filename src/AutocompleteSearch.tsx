@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 
@@ -40,34 +40,31 @@ function AutocompleteSearch(props: AutocompleteSearchProps) {
   };
 
   const debounceTimeout = 300;
-  const debounceCallback = useCallback(
-    debounce((searchInput) => {
-      if (searchInput.length > 0) {
-        axios
-          .get<GeocodingMatch[]>(`/api/v1/geocoding?q=${searchInput}`)
-          .then(({ data }) => {
-            setErrorMessage('');
-            setGeocodingMatches(
-              data.map((x) => {
-                x.key = `${x.lat} ${x.lon}`;
-                return x;
-              })
-            );
-          })
-          .catch((error) => {
-            setErrorMessage(
-              'Something went wrong. Please try again in a minute or try a different search.'
-            );
-            setGeocodingMatches([]);
-            updateFocusedLiKey(null);
-          });
-      } else {
-        setGeocodingMatches([]);
-        updateFocusedLiKey(null);
-      }
-    }, debounceTimeout),
-    []
-  );
+  const debounceCallback = debounce((searchInput) => {
+    if (searchInput.length > 0) {
+      axios
+        .get<GeocodingMatch[]>(`/api/v1/geocoding?q=${searchInput}`)
+        .then(({ data }) => {
+          setErrorMessage('');
+          setGeocodingMatches(
+            data.map((x) => {
+              x.key = `${x.lat} ${x.lon}`;
+              return x;
+            })
+          );
+        })
+        .catch((error) => {
+          setErrorMessage(
+            'Something went wrong. Please try again in a minute or try a different search.'
+          );
+          setGeocodingMatches([]);
+          updateFocusedLiKey(null);
+        });
+    } else {
+      setGeocodingMatches([]);
+      updateFocusedLiKey(null);
+    }
+  }, debounceTimeout);
 
   const keys = {
     ENTER: 13,
