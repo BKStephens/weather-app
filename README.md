@@ -21,14 +21,8 @@ cp .env.template .env
 
 ## Run
 
-Start the server (`yarn server:start`)
-and then navigate to [http://localhost:8000](http://localhost:8000)
-
-## Development
-
-While making changes to the client side React code, you will need to run `yarn
-client:build` or stop and start the server with `yarn server:start` in order for
-your changes to be picked up.
+Start the server and client with `yarn dev`
+and then navigate to [http://localhost:3000](http://localhost:3000)
 
 ## Available Scripts
 

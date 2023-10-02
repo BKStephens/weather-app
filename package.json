@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/lodash.debounce": "^4.0.6",
     "axios": "^0.24.0",
+    "concurrently": "^8.2.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "lodash.debounce": "^4.0.8",
@@ -26,12 +27,15 @@
     ]
   },
   "scripts": {
-    "server:start": "yarn client:build && ts-node-dev --project ./server/tsconfig.json ./server/index.ts",
+    "dev": "concurrently --kill-others-on-fail \"yarn server:start\" \"yarn client:start\"",
+    "server:start": "ts-node-dev --respawn --project ./server/tsconfig.json ./server/index.ts",
     "server:test": "jest --testPathPattern=server",
     "client:build": "react-scripts build",
+    "client:start": "react-scripts start",
     "client:test": "react-scripts test",
     "prepare": "husky install"
   },
+  "proxy": "http://localhost:8000",
   "eslintConfig": {
     "extends": [
       "react-app",
